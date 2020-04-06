@@ -3,11 +3,11 @@ package kr.ac.skuniv.artsharing.service.art;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ac.skuniv.artsharing.domain.dto.art.ArtGetDto;
 import kr.ac.skuniv.artsharing.domain.dto.art.ArtSaveDto;
-import kr.ac.skuniv.artsharing.domain.entity.Art;
-import kr.ac.skuniv.artsharing.domain.entity.ArtImage;
-import kr.ac.skuniv.artsharing.domain.entity.Member;
-import kr.ac.skuniv.artsharing.repository.ArtImageRepository;
-import kr.ac.skuniv.artsharing.repository.ArtRepository;
+import kr.ac.skuniv.artsharing.domain.entity.art.Art;
+import kr.ac.skuniv.artsharing.domain.entity.artImage.ArtImage;
+import kr.ac.skuniv.artsharing.domain.entity.member.Member;
+import kr.ac.skuniv.artsharing.repository.artImage.ArtImageRepository;
+import kr.ac.skuniv.artsharing.repository.art.ArtRepository;
 import kr.ac.skuniv.artsharing.service.CommonService;
 import kr.ac.skuniv.artsharing.service.artImage.ArtImageService;
 import org.jeasy.random.EasyRandom;
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -49,7 +50,7 @@ class ArtSaveServiceTest {
     private Art artFixture = new EasyRandom().nextObject(Art.class);
     private ArtImage artImageFixture = new EasyRandom().nextObject(ArtImage.class);
     private Cookie cookie = new Cookie("user", "token");
-    private MockMultipartFile file = new MockMultipartFile("imageFile", "test.txt", null, "test data".getBytes());
+    private MockMultipartFile file = new MockMultipartFile("imageFile", "test.txt", MediaType.IMAGE_JPEG_VALUE, "test data".getBytes());
     @Test
     void saveArt() throws IOException {
         //given

@@ -2,9 +2,9 @@ package kr.ac.skuniv.artsharing.service.member;
 
 import kr.ac.skuniv.artsharing.domain.dto.member.MemberGetDto;
 import kr.ac.skuniv.artsharing.domain.dto.member.SignUpDto;
-import kr.ac.skuniv.artsharing.domain.entity.Member;
+import kr.ac.skuniv.artsharing.domain.entity.member.Member;
 import kr.ac.skuniv.artsharing.domain.roles.MemberRole;
-import kr.ac.skuniv.artsharing.repository.MemberRepository;
+import kr.ac.skuniv.artsharing.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class SignUpService {
      * @param userId : 중복 체크를 하고자 하는 userId
      * @return : 중복된 ID가 없으면 false
      */
-    public Boolean checkUserID(String userId) {
+    public Boolean checkUserId(String userId) {
         return memberRepository.existsByUserId(userId);
     }
 }

@@ -1,9 +1,11 @@
 package kr.ac.skuniv.artsharing.service.member;
 
 import kr.ac.skuniv.artsharing.domain.dto.member.SignInDto;
-import kr.ac.skuniv.artsharing.domain.entity.Member;
+import kr.ac.skuniv.artsharing.domain.entity.member.Member;
 import kr.ac.skuniv.artsharing.exception.UserDefineException;
-import kr.ac.skuniv.artsharing.repository.MemberRepository;
+import kr.ac.skuniv.artsharing.exception.member.MemberNotFoundException;
+import kr.ac.skuniv.artsharing.exception.member.WrongPasswordException;
+import kr.ac.skuniv.artsharing.repository.member.MemberRepository;
 import kr.ac.skuniv.artsharing.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,6 @@ public class SignInService {
     private final JwtProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
 
-
     /**
      * 로그인
      * @param signInDto : 로그인할 데이터 (ID, PASSWORD)
@@ -31,10 +32,10 @@ public class SignInService {
     public String signIn(SignInDto signInDto, HttpServletResponse response) {
 
         Member member = memberRepository.findByUserId(signInDto.getUserId())
-                .orElseThrow(()->new UserDefineException("존재하지 않는 아이디입니다."));
+                .orElseThrow(MemberNotFoundException::new);
 
         if(!passwordEncoder.matches(signInDto.getPassword(), member.getPassword())) {
-            throw new UserDefineException("비밀번호가 틀렸습니다.");
+            throw new WrongPasswordException();
         }
 
         Cookie cookie = new Cookie("user", jwtProvider.createToken(member.getUserId(), member.getRole()));

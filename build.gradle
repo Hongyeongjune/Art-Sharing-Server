@@ -64,7 +64,10 @@ dependencies {
 	testImplementation 'org.jeasy:easy-random-core:4.1.0'
 	compile 'software.amazon.awssdk:s3:2.10.79'
 	implementation 'com.amazonaws:aws-java-sdk:1.11.718'
+	implementation 'org.apache.commons:commons-lang3:3.9'
+	implementation 'commons-io:commons-io:2.6'
 }
+
 
 sourceSets {
 	main.java.srcDirs += [generated]

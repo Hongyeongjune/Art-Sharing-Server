@@ -31,3 +31,12 @@ resources:
 #  image-locations : /home/ubuntu/ec2-user/img/
 #  image-url : 142.63.193.106:8080
 
+cloud:
+  aws:
+    s3:
+      bucket : jaehobucket
+      dirName: artSharing
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
